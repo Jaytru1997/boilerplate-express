@@ -11,6 +11,7 @@ console.log("Hello World");
 var absoultePath = __dirname;
 
 /* Middleware */
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public', express.static(absoultePath + '/public')); //serve static files
 
 //Middleware with complete arguments: re,res,next
@@ -49,7 +50,11 @@ app.get('/:word/echo', function (req, res) {
 
 
 app.get('/name', function (req, res) {
-    res.json({ "name": `${req.query.first} ${req.query.last}` })
+    res.json({ "name": `${req.query.first} ${req.query.last}` });
+});
+
+app.post('/name', function (req, res) {
+    res.json({ "name": `${req.body.first} ${req.body.last}` })
 });
 
 module.exports = app;
